@@ -31,6 +31,6 @@ app.listen(PORT, () => {
     console.log(`server started and running at ${PORT}`)
 });
 
-app.use('/home', (req, res) => {
+app.use('/', (req, res) => {
     res.send("<h1> App Is Running <h1/>")
 })
