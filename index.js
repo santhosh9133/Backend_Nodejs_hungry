@@ -1,14 +1,12 @@
-const express = require('express');
+const express = require("express");
 const dotEnv = require('dotenv');
 const mongoose = require('mongoose');
+const vendorRoutes = require('./routes/vendorRoutes');
 const bodyParser = require('body-parser');
 const firmRoutes = require('./routes/firmRoutes');
 const productRoutes = require('./routes/productRoutes');
-const vendorRoutes = require('./routes/vendorRoutes');
 const cors = require('cors');
-const path = require('path');
-
-
+const path = require('path')
 
 const app = express()
 
@@ -18,19 +16,19 @@ dotEnv.config();
 app.use(cors())
 
 mongoose.connect(process.env.MONGO_URI)
-.then(()=>console.log("MONGODB CONNECTED SUCCESSFULLY"))
-.catch((error)=>console.log(error))
+    .then(() => console.log("MongoDB connected successfully!"))
+    .catch((error) => console.log(error))
 
 app.use(bodyParser.json());
-app.use("/vendor", vendorRoutes);
-app.use("/firm", firmRoutes);
-app.use("/product", productRoutes);
-app.use('/uplods', express.static('uploads'));
+app.use('/vendor', vendorRoutes);
+app.use('/firm', firmRoutes)
+app.use('/product', productRoutes);
+app.use('/uploads', express.static('uploads'));
 
 app.listen(PORT, () => {
-    console.log(`server started and running at ${PORT}`)
+    console.log(`server started and running at ${PORT}`);
 });
 
 app.use('/', (req, res) => {
-    res.send("<h1> App Is Running <h1/>")
+    res.send("<h1> Welcome to SUBY");
 })
